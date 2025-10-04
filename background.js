@@ -19,7 +19,7 @@ class SettingsManager {
     };
 
     // Hardcoded Google Translate API Key
-    this.apiKey = 'AIzaSyDLEeFI5OtFBwYBIoK_jj5m32rZK5CkCXA';
+    this.apiKey = 'YOUR_API_KEY';
 
     this.supportedLanguages = [
       'tr', 'en', 'es', 'fr', 'de', 'it', 'pt', 'ru', 'ja', 'ko', 'zh', 'ar'
