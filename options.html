@@ -1,0 +1,637 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+    <title>Discord Translator - Settings</title>
+    <link rel="stylesheet" href="options.css">
+    <style>
+        /* Bayrak icon'ları için CSS - 16x16 PNG dosyaları - Updated: v2.0 */
+        .flag-icon {
+            display: inline-block;
+            width: 16px;
+            height: 16px;
+            margin-right: 6px;
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
+            vertical-align: middle;
+            border-radius: 2px;
+        }
+        
+        /* Her ülke için bayrak icon'ları */
+        .flag-tr { background-image: url('icons/flags/tr.png'); }
+        .flag-us { background-image: url('icons/flags/us.png'); }
+        .flag-es { background-image: url('icons/flags/es.png'); }
+        .flag-fr { background-image: url('icons/flags/fr.png'); }
+        .flag-de { background-image: url('icons/flags/de.png'); }
+        .flag-it { background-image: url('icons/flags/it.png'); }
+        .flag-pt { background-image: url('icons/flags/pt.png'); }
+        .flag-ru { background-image: url('icons/flags/ru.png'); }
+        .flag-ja { background-image: url('icons/flags/ja.png'); }
+        .flag-ko { background-image: url('icons/flags/ko.png'); }
+        .flag-zh { background-image: url('icons/flags/zh.png'); }
+        .flag-ar { background-image: url('icons/flags/ar.png'); }
+        
+        /* Select option styling */
+        .modern-select {
+            position: relative;
+            background: #2f3136;
+            color: #fff;
+            border: 1px solid #4f545c;
+            border-radius: 4px;
+            padding: 8px 12px;
+            font-size: 14px;
+            appearance: none;
+            background-image: url('data:image/svg+xml;charset=US-ASCII,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 4 5"><path fill="%23ffffff" d="M2 0L0 2h4zm0 5L0 3h4z"/></svg>');
+            background-repeat: no-repeat;
+            background-position: right 8px center;
+            background-size: 12px;
+            padding-right: 30px;
+        }
+        
+        .modern-select option {
+            padding: 8px 12px;
+            background: #2f3136;
+            color: #fff;
+        }
+        
+        /* Select wrapper için özel stil */
+        .select-wrapper {
+            position: relative;
+            display: inline-block;
+            width: 100%;
+        }
+        
+        .select-wrapper::before {
+            content: '';
+            position: absolute;
+            left: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 16px;
+            height: 16px;
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
+            z-index: 1;
+            pointer-events: none;
+        }
+        
+        /* Selected option'a göre bayrak gösterme */
+        .select-wrapper[data-selected="tr"]::before { background-image: url('icons/flags/tr.png'); }
+        .select-wrapper[data-selected="en"]::before { background-image: url('icons/flags/us.png'); }
+        .select-wrapper[data-selected="es"]::before { background-image: url('icons/flags/es.png'); }
+        .select-wrapper[data-selected="fr"]::before { background-image: url('icons/flags/fr.png'); }
+        .select-wrapper[data-selected="de"]::before { background-image: url('icons/flags/de.png'); }
+        .select-wrapper[data-selected="it"]::before { background-image: url('icons/flags/it.png'); }
+        .select-wrapper[data-selected="pt"]::before { background-image: url('icons/flags/pt.png'); }
+        .select-wrapper[data-selected="ru"]::before { background-image: url('icons/flags/ru.png'); }
+        .select-wrapper[data-selected="ja"]::before { background-image: url('icons/flags/ja.png'); }
+        .select-wrapper[data-selected="ko"]::before { background-image: url('icons/flags/ko.png'); }
+        .select-wrapper[data-selected="zh"]::before { background-image: url('icons/flags/zh.png'); }
+        .select-wrapper[data-selected="ar"]::before { background-image: url('icons/flags/ar.png'); }
+        
+        /* Custom Select Styling */
+        .custom-select-wrapper {
+            position: relative;
+            width: 100%;
+        }
+        
+        .custom-select {
+            position: relative;
+            display: inline-block;
+            width: 100%;
+        }
+        
+        .custom-select-trigger {
+            position: relative;
+            display: flex;
+            align-items: center;
+            padding: 8px 12px;
+            background: #2f3136;
+            color: #fff;
+            border: 1px solid #4f545c;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 14px;
+            min-height: 20px;
+        }
+        
+        .custom-select-trigger:hover {
+            border-color: #7289da;
+        }
+        
+        .custom-select-trigger .select-text {
+            flex: 1;
+            margin-left: 6px;
+        }
+        
+        .custom-select-trigger .arrow {
+            margin-left: auto;
+            font-size: 10px;
+            transition: transform 0.3s ease;
+        }
+        
+        .custom-select.open .arrow {
+            transform: rotate(180deg);
+        }
+        
+        .custom-options {
+            position: absolute;
+            left: 0;
+            right: 0;
+            z-index: 9999 !important;
+            background: #2f3136 !important;
+            backdrop-filter: none !important;
+            -webkit-backdrop-filter: none !important;
+            border: 1px solid rgba(114, 137, 218, 0.5) !important;
+            border-radius: 12px !important;
+            max-height: 180px;
+            overflow-y: auto;
+            display: none;
+            box-shadow: 0 12px 35px rgba(0, 0, 0, 0.3) !important;
+        }
+        
+        /* Dropdown yukarıya açılması için - güçlendirilmiş */
+        .custom-select.open-upward .custom-options {
+            bottom: 100% !important;
+            top: auto !important;
+            margin-bottom: 8px !important;
+            margin-top: 0 !important;
+        }
+        
+        /* Dropdown aşağıya açılması için */
+        .custom-select.open-downward .custom-options {
+            top: 100% !important;
+            bottom: auto !important;
+            margin-top: 8px !important;
+            margin-bottom: 0 !important;
+        }
+        
+        /* Varsayılan olarak yukarıya açılsın (fallback) */
+        .custom-select.open .custom-options {
+            bottom: 100% !important;
+            top: auto !important;
+            margin-bottom: 8px !important;
+        }
+        
+        .custom-select.open .custom-options {
+            display: block;
+        }
+        
+        .custom-option {
+            display: flex;
+            align-items: center;
+            padding: 10px 14px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            border-radius: 8px;
+            margin: 3px 6px;
+            background: #36393f !important;
+        }
+        
+        .custom-option:hover {
+            background: #4f545c !important;
+            transform: translateX(3px);
+            box-shadow: 0 2px 8px rgba(114, 137, 218, 0.2);
+        }
+        
+        .custom-option.selected {
+            background: #7289da !important;
+            border-left: 4px solid #5b6eae;
+            padding-left: 10px;
+            box-shadow: 0 0 12px rgba(114, 137, 218, 0.3);
+            color: #ffffff !important;
+            font-weight: 600;
+        }
+        
+        .custom-option:first-child {
+            margin-top: 6px;
+        }
+        
+        .custom-option:last-child {
+            margin-bottom: 6px;
+        }
+        
+        .custom-option span:last-child {
+            margin-left: 6px;
+        }
+        
+        /* Scrollbar styling for custom options */
+        .custom-options::-webkit-scrollbar {
+            width: 8px;
+        }
+        
+        .custom-options::-webkit-scrollbar-track {
+            background: transparent;
+            border-radius: 4px;
+        }
+        
+        .custom-options::-webkit-scrollbar-thumb {
+            background: rgba(114, 137, 218, 0.3);
+            border-radius: 4px;
+            border: 2px solid transparent;
+            background-clip: content-box;
+        }
+        
+        .custom-options::-webkit-scrollbar-thumb:hover {
+            background: rgba(114, 137, 218, 0.6);
+            background-clip: content-box;
+        }
+        
+        /* Windows emoji fallback - replace flag emojis with CSS backgrounds */
+        @media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {
+            /* IE/Edge detection */
+            .modern-select option[data-flag="tr"]::before { content: ""; display: inline-block; width: 16px; height: 12px; margin-right: 4px; background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAzMCAyMCI+PHJlY3Qgd2lkdGg9IjMwIiBoZWlnaHQ9IjIwIiBmaWxsPSIjRTMwQTEzIi8+PGNpcmNsZSBjeD0iMTIiIGN5PSIxMCIgcj0iNCIgZmlsbD0iI0ZGRiIvPjxjaXJjbGUgY3g9IjEzIiBjeT0iMTAiIHI9IjMuMiIgZmlsbD0iI0UzMEExMyIvPjxwYXRoIGQ9Im0xNS41IDcuNS0uNS44LS45LS4zLjUuOC0uNi43aDEuMWwuNS44LS4xLTEgLjktLjN6IiBmaWxsPSIjRkZGIi8+PC9zdmc+'); background-size: contain; background-repeat: no-repeat; }
+        }
+        
+        /* Windows Chrome/Edge detection and fallback */
+        @supports (-webkit-appearance: none) {
+            /* Chrome/Edge detection */
+            .modern-select option {
+                font-family: 'Segoe UI Emoji', 'Apple Color Emoji', 'Noto Color Emoji', sans-serif;
+            }
+        }
+        
+        /* Force emoji font on Windows */
+        @media screen and (min-width: 0px) {
+            .modern-select {
+                font-family: 'Segoe UI Emoji', 'Apple Color Emoji', 'Noto Color Emoji', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            }
+            .modern-select option {
+                font-family: 'Segoe UI Emoji', 'Apple Color Emoji', 'Noto Color Emoji', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            }
+        }
+        
+        /* Footer spacing optimization */
+        .settings-footer {
+            margin-top: 20px !important;
+            padding: 15px 0 !important;
+            width: 1320px;
+            height: 150px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .footer-content {
+            display: flex;
+            flex-direction: column;
+            gap: 5px !important;
+            max-width: 400px;
+            margin: 0 auto;
+        }
+        
+        .button-group {
+            margin-bottom: 3px !important;
+        }
+        
+        .status-message {
+            margin: 3px 0 !important;
+            min-height: 20px;
+            color: #ffffff !important;
+            font-weight: 500;
+            text-align: center;
+        }
+        
+        .footer-info {
+            margin-top: 2px !important;
+            padding-top: 2px !important;
+            font-size: 11px;
+            color: #000000 !important;
+            text-align: center;
+            line-height: 1.2;
+            font-weight: 500;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <header class="main-header">
+            <div class="header-content">
+                <div class="logo-section">
+                    <div class="logo">
+                        <img src="icons/256x256.png" alt="Discord Translator" style="width: 100%; height: 100%; object-fit: contain; border-radius: 16px;">
+                    </div>
+                    <div class="header-text">
+                        <h1 data-tr="Discord Translator" data-en="Discord Translator">Discord Translator</h1>
+                        <p data-tr="Gelişmiş çeviri ayarları" data-en="Advanced translation settings">Advanced translation settings</p>
+                    </div>
+                </div>
+                <div class="header-controls">
+                    <div class="language-toggle">
+                        <button type="button" id="langEn" class="lang-btn active" data-lang="en">
+                            <span class="flag-icon flag-us"></span>EN
+                        </button>
+                        <button type="button" id="langTr" class="lang-btn" data-lang="tr">
+                            <span class="flag-icon flag-tr"></span>TR
+                        </button>
+                    </div>
+                    <div class="header-stats">
+                        <div class="stat-item">
+                            <span class="stat-label" data-tr="Durum" data-en="Status">Status</span>
+                            <span class="stat-value active" id="extensionStatus" data-tr="Aktif" data-en="Active">Active</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <main class="settings-main">
+            <div class="settings-grid">
+                <section class="settings-card">
+                    <div class="card-header">
+                        <div class="card-icon">📖</div>
+                        <div class="card-title">
+                            <h2 data-tr="Okuma Ayarları" data-en="Reading Settings">Reading Settings</h2>
+                            <p data-tr="Gelen mesajların çeviri ayarları" data-en="Translation settings for incoming messages">Translation settings for incoming messages</p>
+                        </div>
+                    </div>
+
+                    <div class="card-content">
+                        <div class="setting-group">
+                            <label class="setting-label" data-tr="Çeviri Modu" data-en="Translation Mode">Translation Mode</label>
+                            <div class="radio-group">
+                                <label class="radio-option">
+                                    <input type="radio" name="readingMode" value="auto" id="readingModeAuto">
+                                    <div class="radio-content">
+                                        <div class="radio-header">
+                                            <span class="radio-icon">⚡</span>
+                                            <span class="radio-title" data-tr="Otomatik Çeviri" data-en="Auto Translate">Auto Translate</span>
+                                        </div>
+                                        <small class="radio-desc" data-tr="Mesajlar anında çevrilir" data-en="Messages are translated instantly">Messages are translated instantly</small>
+                                    </div>
+                                </label>
+                                <label class="radio-option">
+                                    <input type="radio" name="readingMode" value="click" id="readingModeClick">
+                                    <div class="radio-content">
+                                        <div class="radio-header">
+                                            <span class="radio-icon">👆</span>
+                                            <span class="radio-title" data-tr="Tıkla-Çevir" data-en="Click to Translate">Click to Translate</span>
+                                        </div>
+                                        <small class="radio-desc" data-tr="Mesajlara tıklayarak çeviri" data-en="Click on messages to translate">Click on messages to translate</small>
+                                    </div>
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="setting-group">
+                            <label for="readingTargetLang" class="setting-label" data-tr="Kaynak Dil" data-en="Source Language">Source Language</label>
+                            <div class="custom-select-wrapper" data-name="readingTargetLang">
+                                <div class="custom-select" data-value="tr">
+                                    <div class="custom-select-trigger">
+                                        <span class="flag-icon flag-tr"></span>
+                                        <span class="select-text">Türkçe</span>
+                                        <div class="arrow">▼</div>
+                                    </div>
+                                    <div class="custom-options">
+                                        <div class="custom-option" data-value="tr">
+                                            <span class="flag-icon flag-tr"></span>
+                                            <span>Türkçe</span>
+                                        </div>
+                                        <div class="custom-option" data-value="en">
+                                            <span class="flag-icon flag-us"></span>
+                                            <span>English</span>
+                                        </div>
+                                        <div class="custom-option" data-value="es">
+                                            <span class="flag-icon flag-es"></span>
+                                            <span>Español</span>
+                                        </div>
+                                        <div class="custom-option" data-value="fr">
+                                            <span class="flag-icon flag-fr"></span>
+                                            <span>Français</span>
+                                        </div>
+                                        <div class="custom-option" data-value="de">
+                                            <span class="flag-icon flag-de"></span>
+                                            <span>Deutsch</span>
+                                        </div>
+                                        <div class="custom-option" data-value="it">
+                                            <span class="flag-icon flag-it"></span>
+                                            <span>Italiano</span>
+                                        </div>
+                                        <div class="custom-option" data-value="pt">
+                                            <span class="flag-icon flag-pt"></span>
+                                            <span>Português</span>
+                                        </div>
+                                        <div class="custom-option" data-value="ru">
+                                            <span class="flag-icon flag-ru"></span>
+                                            <span>Русский</span>
+                                        </div>
+                                        <div class="custom-option" data-value="ja">
+                                            <span class="flag-icon flag-ja"></span>
+                                            <span>日本語</span>
+                                        </div>
+                                        <div class="custom-option" data-value="ko">
+                                            <span class="flag-icon flag-ko"></span>
+                                            <span>한국어</span>
+                                        </div>
+                                        <div class="custom-option" data-value="zh">
+                                            <span class="flag-icon flag-zh"></span>
+                                            <span>中文</span>
+                                        </div>
+                                        <div class="custom-option" data-value="ar">
+                                            <span class="flag-icon flag-ar"></span>
+                                            <span>العربية</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <input type="hidden" id="readingTargetLang" name="readingTargetLang" value="tr">
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="settings-card">
+                    <div class="card-header">
+                        <div class="card-icon">✍️</div>
+                        <div class="card-title">
+                            <h2 data-tr="Yazma Ayarları" data-en="Writing Settings">Writing Settings</h2>
+                            <p data-tr="Gönderdiğiniz mesajların çeviri ayarları" data-en="Translation settings for your messages">Translation settings for your messages</p>
+                        </div>
+                    </div>
+
+                    <div class="card-content">
+                        <div class="setting-group">
+                            <label class="toggle-switch">
+                                <input type="checkbox" id="writingEnabled" name="writingEnabled">
+                                <span class="toggle-slider"></span>
+                                <div class="toggle-content">
+                                    <span class="toggle-title" data-tr="Yazma Çevirisini Etkinleştir" data-en="Enable Writing Translation">Enable Writing Translation</span>
+                                    <small class="toggle-desc" data-tr="Kısayol tuşu ile mesajlarınızı çevirin" data-en="Translate your messages with shortcut key">Translate your messages with shortcut key</small>
+                                </div>
+                            </label>
+                        </div>
+
+                        <div class="setting-group">
+                            <label class="setting-label" data-tr="Kısayol Tuşu" data-en="Shortcut Key">Shortcut Key</label>
+                            <div class="shortcut-recorder-container">
+                                <div class="shortcut-display" id="shortcutDisplay">
+                                    <span class="shortcut-text" id="shortcutText">Ctrl + I</span>
+                                    <button type="button" class="shortcut-record-btn" id="recordShortcutBtn" data-tr="Değiştir" data-en="Change">Change</button>
+                                </div>
+                                <div class="shortcut-recorder" id="shortcutRecorder" style="display: none;">
+                                    <div class="recorder-content">
+                                        <div class="recorder-icon">⌨️</div>
+                                        <p class="recorder-text" data-tr="İstediğiniz tuş kombinasyonunu basın..." data-en="Press your desired key combination...">Press your desired key combination...</p>
+                                        <div class="recorder-buttons">
+                                            <button type="button" class="btn-small btn-secondary" id="cancelRecordBtn" data-tr="İptal" data-en="Cancel">Cancel</button>
+                                            <button type="button" class="btn-small btn-primary" id="resetShortcutBtn" data-tr="Varsayılan" data-en="Default">Default</button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <p class="shortcut-help" data-tr="Herhangi bir tuş veya tuş kombinasyonunu kullanabilirsiniz. Örnekler: F11, F12, Ctrl+U, Alt+Q, Space, Enter, sadece U" data-en="You can use any key or key combination. Examples: F11, F12, Ctrl+U, Alt+Q, Space, Enter, just U">You can use any key or key combination. Examples: F11, F12, Ctrl+U, Alt+Q, Space, Enter, just U</p>
+                            </div>
+                        </div>
+
+                        <div class="setting-group">
+                            <label for="writingTargetLang" class="setting-label" data-tr="Hedef Dil" data-en="Target Language">Target Language</label>
+                            <div class="custom-select-wrapper" data-name="writingTargetLang">
+                                <div class="custom-select" data-value="en">
+                                    <div class="custom-select-trigger">
+                                        <span class="flag-icon flag-us"></span>
+                                        <span class="select-text">English</span>
+                                        <div class="arrow">▼</div>
+                                    </div>
+                                    <div class="custom-options">
+                                        <div class="custom-option" data-value="en">
+                                            <span class="flag-icon flag-us"></span>
+                                            <span>English</span>
+                                        </div>
+                                        <div class="custom-option" data-value="tr">
+                                            <span class="flag-icon flag-tr"></span>
+                                            <span>Türkçe</span>
+                                        </div>
+                                        <div class="custom-option" data-value="es">
+                                            <span class="flag-icon flag-es"></span>
+                                            <span>Español</span>
+                                        </div>
+                                        <div class="custom-option" data-value="fr">
+                                            <span class="flag-icon flag-fr"></span>
+                                            <span>Français</span>
+                                        </div>
+                                        <div class="custom-option" data-value="de">
+                                            <span class="flag-icon flag-de"></span>
+                                            <span>Deutsch</span>
+                                        </div>
+                                        <div class="custom-option" data-value="it">
+                                            <span class="flag-icon flag-it"></span>
+                                            <span>Italiano</span>
+                                        </div>
+                                        <div class="custom-option" data-value="pt">
+                                            <span class="flag-icon flag-pt"></span>
+                                            <span>Português</span>
+                                        </div>
+                                        <div class="custom-option" data-value="ru">
+                                            <span class="flag-icon flag-ru"></span>
+                                            <span>Русский</span>
+                                        </div>
+                                        <div class="custom-option" data-value="ja">
+                                            <span class="flag-icon flag-ja"></span>
+                                            <span>日本語</span>
+                                        </div>
+                                        <div class="custom-option" data-value="ko">
+                                            <span class="flag-icon flag-ko"></span>
+                                            <span>한국어</span>
+                                        </div>
+                                        <div class="custom-option" data-value="zh">
+                                            <span class="flag-icon flag-zh"></span>
+                                            <span>中文</span>
+                                        </div>
+                                        <div class="custom-option" data-value="ar">
+                                            <span class="flag-icon flag-ar"></span>
+                                            <span>العربية</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <input type="hidden" id="writingTargetLang" name="writingTargetLang" value="en">
+                            </div>
+                        </div>
+
+                    </div>
+                </section>
+
+                <section class="settings-card developer-info">
+                    <div class="card-header">
+                        <div class="card-icon">👨‍💻</div>
+                        <div class="card-title">
+                            <h2 data-tr="Geliştirici Bilgileri" data-en="Developer Information">Developer Information</h2>
+                            <p data-tr="İletişim ve destek bilgileri" data-en="Contact and support information">Contact and support information</p>
+                        </div>
+                    </div>
+
+                    <div class="card-content">
+                        <div class="developer-section">
+                            <!-- Support Section -->
+                            <div class="support-header">
+                                <div class="support-icon">💰</div>
+                                <h3 class="support-title" data-tr="Destek" data-en="Support">Support</h3>
+                            </div>
+
+                            <div class="developer-content-left">
+                                <p class="support-text" data-tr="Eklentimi beğendiyseniz ve geliştirmeme katkıda bulunmak isterseniz, aşağıdaki cüzdan adresi bir EVM adresidir. Göndermek istediğiniz tutarı tamamen siz belirlersiniz." data-en="If you like my extension and want to contribute to its development, the wallet address below is an EVM address. You determine the amount you want to send.">
+                                    If you like my extension and want to contribute to its development,
+                                    the wallet address below is an EVM address. You determine the amount
+                                    you want to send.
+                                </p>
+                                <div class="evm-address">
+                                    <span class="address-label" data-tr="EVM:" data-en="EVM:">EVM:</span>
+                                    <code class="address-code"
+                                        id="evmAddress">0x1F5d80F3b785D4630a65403DB4fA4804861814D0</code>
+                                    <button class="copy-btn" id="copyAddressBtn" data-tr-title="Adresi kopyala" data-en-title="Copy address" title="Copy address">
+                                        📋
+                                    </button>
+                                </div>
+                            </div>
+
+                            <div class="developer-item">
+                                <div class="developer-icon">
+                                    <img src="icons/x.png" alt="X" class="x-icon">
+                                </div>
+                                <div class="developer-content">
+                                    <h3 data-tr="X (Twitter)" data-en="X (Twitter)">X (Twitter)</h3>
+                                    <p class="twitter-text" data-tr="Beni X'den takip etmek için aşağıdaki butonu kullanabilirsiniz:" data-en="You can use the button below to follow me on X:">
+                                        You can use the button below to follow me on X:
+                                    </p>
+                                    <a href="https://x.com/isnotberlin" target="_blank" class="twitter-follow-btn">
+                                        <span class="twitter-btn-text" data-tr="Takip Et" data-en="Follow">Follow</span>
+                                        <span class="twitter-username">@isnotberlin</span>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </main>
+
+        <footer class="settings-footer">
+            <div class="footer-content">
+                <div id="status" class="status-message"></div>
+                <div class="button-group">
+                    <button type="button" id="saveBtn" class="btn btn-primary">
+                        <span class="btn-icon">💾</span>
+                        <span data-tr="Ayarları Kaydet" data-en="Save Settings">Save Settings</span>
+                    </button>
+                    <button type="button" id="resetBtn" class="btn btn-secondary">
+                        <span class="btn-icon">🔄</span>
+                        <span data-tr="Sıfırla" data-en="Reset">Reset</span>
+                    </button>
+                </div>
+                <div class="footer-info">
+                    <span>Discord Translator v1.0.0</span>
+                    <span>•</span>
+                    <span data-tr="Gelişmiş çeviri deneyimi" data-en="Advanced translation experience">Advanced translation experience</span>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <script src="options.js"></script>
+</body>
+
+</html>

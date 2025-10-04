@@ -1,0 +1,1045 @@
+/* Discord Translator Extension - Modern Options Page Styles */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    min-height: 100vh;
+    color: #ffffff;
+    line-height: 1.6;
+}
+
+.container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 15px;
+}
+
+/* Header Styles */
+.main-header {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(20px);
+    border-radius: 16px;
+    padding: 20px;
+    margin-bottom: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+}
+
+.header-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.header-controls {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 15px;
+}
+
+.language-toggle {
+    display: flex;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    padding: 4px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.lang-btn {
+    padding: 8px 16px;
+    border: none;
+    background: transparent;
+    color: rgba(255, 255, 255, 0.7);
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.lang-btn:hover {
+    background: rgba(255, 255, 255, 0.1);
+    color: rgba(255, 255, 255, 0.9);
+}
+
+.lang-btn.active {
+    background: rgba(255, 255, 255, 0.2);
+    color: #ffffff;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.logo-section {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.logo {
+    width: 60px;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.header-text h1 {
+    font-size: 1.8rem;
+    font-weight: 700;
+    margin-bottom: 4px;
+    background: linear-gradient(45deg, #ffffff, #f0f0f0);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.header-text p {
+    font-size: 0.9rem;
+    opacity: 0.8;
+    color: #ffffff;
+}
+
+.header-stats {
+    display: flex;
+    gap: 20px;
+}
+
+.stat-item {
+    text-align: center;
+}
+
+.stat-label {
+    display: block;
+    font-size: 0.8rem;
+    opacity: 0.7;
+    margin-bottom: 4px;
+}
+
+.stat-value {
+    display: block;
+    font-size: 0.9rem;
+    font-weight: 600;
+    padding: 6px 12px;
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.2);
+}
+
+.stat-value.active {
+    background: rgba(76, 175, 80, 0.3);
+    color: #ffffff;
+}
+
+/* Main Content */
+.settings-main {
+    margin-bottom: 20px;
+}
+
+.settings-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 20px;
+    min-height: 400px;
+}
+
+/* Card Styles */
+.settings-card {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(20px);
+    border-radius: 16px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.settings-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+}
+
+.card-header {
+    padding: 18px 20px 15px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.card-icon {
+    font-size: 1.6rem;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+}
+
+.card-title h2 {
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin-bottom: 3px;
+    color: #ffffff;
+}
+
+.card-title p {
+    font-size: 0.8rem;
+    opacity: 0.8;
+    color: #ffffff;
+}
+
+.card-content {
+    padding: 18px 20px;
+}
+
+/* Setting Groups */
+.setting-group {
+    margin-bottom: 18px;
+}
+
+.setting-group:last-child {
+    margin-bottom: 0;
+}
+
+.setting-label {
+    display: block;
+    font-size: 0.9rem;
+    font-weight: 600;
+    margin-bottom: 10px;
+    color: #ffffff;
+}
+
+/* Radio Options */
+.radio-group {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.radio-option {
+    display: block;
+    cursor: pointer;
+    position: relative;
+}
+
+.radio-option input[type="radio"] {
+    position: absolute;
+    opacity: 0;
+    pointer-events: none;
+}
+
+.radio-content {
+    padding: 12px;
+    background: rgba(255, 255, 255, 0.1);
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    border-radius: 10px;
+    transition: all 0.3s ease;
+}
+
+.radio-option:hover .radio-content {
+    background: rgba(255, 255, 255, 0.15);
+    border-color: rgba(255, 255, 255, 0.3);
+}
+
+.radio-option input[type="radio"]:checked+.radio-content {
+    background: rgba(255, 255, 255, 0.2);
+    border-color: rgba(255, 255, 255, 0.5);
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.1);
+}
+
+.radio-header {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 3px;
+}
+
+.radio-icon {
+    font-size: 1rem;
+}
+
+.radio-title {
+    font-weight: 600;
+    color: #ffffff;
+    font-size: 0.9rem;
+}
+
+.radio-desc {
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 0.8rem;
+}
+
+/* Toggle Switch */
+.toggle-switch {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    cursor: pointer;
+    padding: 12px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    transition: all 0.3s ease;
+}
+
+.toggle-switch:hover {
+    background: rgba(255, 255, 255, 0.15);
+    border-color: rgba(255, 255, 255, 0.3);
+}
+
+.toggle-switch input[type="checkbox"] {
+    position: absolute;
+    opacity: 0;
+    pointer-events: none;
+}
+
+.toggle-slider {
+    position: relative;
+    width: 50px;
+    height: 26px;
+    background: rgba(255, 255, 255, 0.3);
+    border-radius: 13px;
+    transition: all 0.3s ease;
+    flex-shrink: 0;
+}
+
+.toggle-slider::before {
+    content: '';
+    position: absolute;
+    top: 3px;
+    left: 3px;
+    width: 20px;
+    height: 20px;
+    background: #ffffff;
+    border-radius: 50%;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.toggle-switch input[type="checkbox"]:checked+.toggle-slider {
+    background: rgba(76, 175, 80, 0.8);
+}
+
+.toggle-switch input[type="checkbox"]:checked+.toggle-slider::before {
+    transform: translateX(24px);
+}
+
+.toggle-content {
+    flex: 1;
+}
+
+.toggle-title {
+    display: block;
+    font-weight: 600;
+    color: #ffffff;
+    margin-bottom: 3px;
+    font-size: 0.9rem;
+}
+
+.toggle-desc {
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 0.8rem;
+}
+
+/* Select Styles */
+.select-wrapper {
+    position: relative;
+}
+
+.modern-select {
+    width: 100%;
+    padding: 10px 12px;
+    background: rgba(255, 255, 255, 0.1);
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    border-radius: 10px;
+    color: #ffffff;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%23ffffff' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e");
+    background-position: right 10px center;
+    background-repeat: no-repeat;
+    background-size: 14px;
+    padding-right: 35px;
+}
+
+.modern-select:focus {
+    outline: none;
+    border-color: rgba(255, 255, 255, 0.5);
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.1);
+}
+
+.modern-select option {
+    background: #2c3e50;
+    color: #ffffff;
+    padding: 10px;
+}
+
+/* Custom Shortcut Recorder Styles */
+.shortcut-recorder-container {
+    margin-top: 10px;
+}
+
+.shortcut-display {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    padding: 15px;
+    margin-bottom: 10px;
+}
+
+.shortcut-text {
+    font-family: 'Courier New', monospace;
+    font-size: 16px;
+    font-weight: 600;
+    color: #ffffff;
+    background: rgba(255, 255, 255, 0.1);
+    padding: 8px 16px;
+    border-radius: 8px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    letter-spacing: 1px;
+}
+
+.shortcut-record-btn {
+    background: #4752c4;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    padding: 8px 16px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.shortcut-record-btn:hover {
+    background: #3c4aa0;
+    transform: translateY(-1px);
+}
+
+.shortcut-recorder {
+    background: rgba(255, 255, 255, 0.08);
+    border: 2px solid #4752c4;
+    border-radius: 12px;
+    padding: 20px;
+    text-align: center;
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0%, 100% { border-color: #4752c4; }
+    50% { border-color: #7289da; }
+}
+
+.recorder-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+}
+
+.recorder-icon {
+    font-size: 32px;
+    animation: bounce 1s infinite;
+}
+
+@keyframes bounce {
+    0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+    40% { transform: translateY(-10px); }
+    60% { transform: translateY(-5px); }
+}
+
+.recorder-text {
+    font-size: 16px;
+    color: #ffffff;
+    font-weight: 500;
+    margin: 0;
+}
+
+.recorder-buttons {
+    display: flex;
+    gap: 10px;
+}
+
+.btn-small {
+    padding: 6px 12px;
+    font-size: 12px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 500;
+    transition: all 0.2s ease;
+}
+
+.btn-small.btn-secondary {
+    background: rgba(255, 255, 255, 0.1);
+    color: #ffffff;
+}
+
+.btn-small.btn-secondary:hover {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+.btn-small.btn-primary {
+    background: #43b581;
+    color: white;
+}
+
+.btn-small.btn-primary:hover {
+    background: #3ca374;
+}
+
+.shortcut-help {
+    font-size: 13px;
+    color: rgba(255, 255, 255, 0.7);
+    line-height: 1.4;
+    margin-top: 10px;
+    padding: 10px;
+    background: rgba(255, 255, 255, 0.03);
+    border-radius: 6px;
+    border-left: 3px solid rgba(255, 255, 255, 0.2);
+}
+
+/* Footer */
+.settings-footer {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(20px);
+    border-radius: 16px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+}
+
+.footer-content {
+    padding: 20px;
+    text-align: center;
+}
+
+.button-group {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-bottom: 15px;
+}
+
+.btn {
+    padding: 12px 24px;
+    border: none;
+    border-radius: 10px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    min-width: 140px;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transition: left 0.5s;
+}
+
+.btn:hover::before {
+    left: 100%;
+}
+
+.btn-primary {
+    background: linear-gradient(45deg, #4CAF50, #45a049);
+    color: #ffffff;
+    box-shadow: 0 4px 15px rgba(76, 175, 80, 0.3);
+}
+
+.btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(76, 175, 80, 0.4);
+}
+
+.btn-secondary {
+    background: rgba(255, 255, 255, 0.2);
+    color: #ffffff;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.btn-secondary:hover {
+    background: rgba(255, 255, 255, 0.3);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+}
+
+.btn-icon {
+    font-size: 1.1rem;
+}
+
+.status-message {
+    min-height: 24px;
+    font-weight: 600;
+    margin-bottom: 15px;
+    transition: all 0.3s;
+    font-size: 1rem;
+}
+
+.status-message.success {
+    color: #4CAF50;
+}
+
+.status-message.error {
+    color: #f44336;
+}
+
+.status-message.info {
+    color: #2196F3;
+}
+
+.footer-info {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    font-size: 0.85rem;
+    opacity: 0.7;
+    color: #ffffff;
+}
+
+/* Loading States */
+.btn:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    transform: none !important;
+}
+
+.btn.loading {
+    color: transparent;
+}
+
+.btn.loading::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 20px;
+    height: 20px;
+    border: 2px solid transparent;
+    border-top: 2px solid currentColor;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    color: #ffffff;
+}
+
+@keyframes spin {
+    0% {
+        transform: translate(-50%, -50%) rotate(0deg);
+    }
+
+    100% {
+        transform: translate(-50%, -50%) rotate(360deg);
+    }
+}
+
+/* Animations */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.settings-card {
+    animation: fadeInUp 0.6s ease-out;
+}
+
+.settings-card:nth-child(2) {
+    animation-delay: 0.1s;
+}
+
+/* Developer Info Styles */
+.developer-info {
+    /* Normal grid item, no special spanning */
+}
+
+.developer-section {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
+
+.developer-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 15px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.developer-icon {
+    font-size: 1.3rem;
+    width: 35px;
+    height: 35px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    flex-shrink: 0;
+}
+
+/* Support Header Styles */
+.support-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 12px;
+}
+
+.support-icon {
+    font-size: 1.5rem;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    flex-shrink: 0;
+}
+
+.support-title {
+    font-size: 1rem;
+    font-weight: 600;
+    color: #ffffff;
+    margin: 0;
+}
+
+.developer-content-left {
+    margin-left: 0;
+    text-align: left;
+}
+
+.x-icon {
+    width: 20px;
+    height: 20px;
+}
+
+.developer-content {
+    flex: 1;
+}
+
+.developer-content h3 {
+    font-size: 1rem;
+    font-weight: 600;
+    color: #ffffff;
+    margin-bottom: 6px;
+}
+
+.developer-link {
+    color: #4ecdc4;
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.3s ease;
+}
+
+.developer-link:hover {
+    color: #45b7aa;
+    text-decoration: underline;
+}
+
+.twitter-text {
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 0.85rem;
+    line-height: 1.5;
+    margin-bottom: 12px;
+}
+
+.twitter-follow-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 16px;
+    background: linear-gradient(45deg, #1DA1F2, #0d8bd9);
+    color: #ffffff;
+    text-decoration: none;
+    border-radius: 10px;
+    font-weight: 600;
+    font-size: 0.85rem;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(29, 161, 242, 0.3);
+    position: relative;
+    overflow: hidden;
+}
+
+.twitter-follow-btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transition: left 0.5s;
+}
+
+.twitter-follow-btn:hover::before {
+    left: 100%;
+}
+
+.twitter-follow-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(29, 161, 242, 0.4);
+    background: linear-gradient(45deg, #0d8bd9, #1DA1F2);
+}
+
+.twitter-follow-btn:active {
+    transform: translateY(0);
+}
+
+.twitter-icon {
+    width: 16px;
+    height: 16px;
+    filter: invert(1);
+    opacity: 0.9;
+}
+
+.twitter-btn-text {
+    font-weight: 600;
+}
+
+.twitter-username {
+    font-size: 0.85rem;
+    opacity: 0.9;
+    background: rgba(255, 255, 255, 0.2);
+    padding: 2px 8px;
+    border-radius: 12px;
+}
+
+.support-text {
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 0.85rem;
+    line-height: 1.5;
+    margin-bottom: 12px;
+}
+
+.evm-address {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px;
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 8px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.address-label {
+    font-weight: 600;
+    color: #ffffff;
+    font-size: 0.8rem;
+}
+
+.address-code {
+    flex: 1;
+    font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+    font-size: 0.8rem;
+    color: #4ecdc4;
+    background: none;
+    border: none;
+    white-space: nowrap;
+    overflow-x: auto;
+    min-width: 0;
+}
+
+.copy-btn {
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 6px;
+    padding: 5px 7px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 0.8rem;
+    color: #ffffff;
+}
+
+.copy-btn:hover {
+    background: rgba(255, 255, 255, 0.2);
+    transform: scale(1.05);
+}
+
+.copy-btn:active {
+    transform: scale(0.95);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .container {
+        padding: 12px;
+    }
+
+    .settings-grid {
+        grid-template-columns: 1fr 1fr 1fr;
+        gap: 18px;
+    }
+
+    .header-content {
+        flex-direction: column;
+        gap: 15px;
+        text-align: center;
+    }
+
+    .header-controls {
+        align-items: center;
+        width: 100%;
+        flex-direction: column;
+        gap: 12px;
+    }
+
+    .header-stats {
+        justify-content: center;
+    }
+
+    .language-toggle {
+        order: -1;
+        margin-bottom: 8px;
+    }
+
+    .button-group {
+        flex-direction: column;
+        align-items: center;
+        gap: 12px;
+    }
+
+    .btn {
+        width: 100%;
+        max-width: 220px;
+        padding: 10px 20px;
+        font-size: 0.85rem;
+    }
+
+    .card-header {
+        flex-direction: column;
+        text-align: center;
+        gap: 8px;
+        padding: 15px 18px 12px;
+    }
+
+    .logo-section {
+        flex-direction: column;
+        text-align: center;
+        gap: 12px;
+    }
+
+    .header-text h1 {
+        font-size: 1.6rem;
+    }
+
+    .developer-item {
+        flex-direction: column;
+        text-align: center;
+        gap: 8px;
+        padding: 12px;
+    }
+
+    .support-header {
+        justify-content: center;
+        margin-bottom: 10px;
+    }
+
+    .developer-content-left {
+        text-align: center;
+    }
+
+    .twitter-follow-btn {
+        justify-content: center;
+        width: 100%;
+        max-width: 250px;
+        margin: 0 auto;
+        padding: 8px 14px;
+        font-size: 0.8rem;
+    }
+
+    .evm-address {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 6px;
+        padding: 8px;
+    }
+
+    .address-code {
+        text-align: center;
+        font-size: 0.75rem;
+        white-space: nowrap;
+        overflow-x: auto;
+        flex: 1;
+        min-width: 0;
+    }
+}
+
+@media (max-width: 480px) {
+
+    .main-header,
+    .settings-card,
+    .settings-footer {
+        border-radius: 12px;
+    }
+
+    .card-content,
+    .main-header,
+    .footer-content {
+        padding: 15px;
+    }
+
+    .header-text h1 {
+        font-size: 1.4rem;
+    }
+
+    .language-toggle {
+        width: 100%;
+        max-width: 180px;
+    }
+
+    .lang-btn {
+        font-size: 0.75rem;
+        padding: 5px 10px;
+    }
+
+    .header-controls {
+        gap: 8px;
+    }
+
+    .container {
+        padding: 10px;
+    }
+
+    .settings-grid {
+        grid-template-columns: 1fr;
+        gap: 12px;
+    }
+}
